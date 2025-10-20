@@ -1,0 +1,91 @@
+{
+  "id": "side-0003-sprint4",
+  "version": "2.0",
+  "name": "BetAware – Sprint 4 (UI)",
+  "url": "http://localhost:3000",
+  "tests": [
+    {
+      "id": "test-ui-01",
+      "name": "AT-UI-01 Login risco alto exibe alerta",
+      "commands": [
+        {
+          "id": "1",
+          "command": "open",
+          "target": "/login",
+          "value": ""
+        },
+        {
+          "id": "2",
+          "command": "type",
+          "target": "id=email",
+          "value": "u004@teste.com"
+        },
+        {
+          "id": "3",
+          "command": "type",
+          "target": "id=password",
+          "value": "Senha!123"
+        },
+        {
+          "id": "4",
+          "command": "click",
+          "target": "id=btnEntrar",
+          "value": ""
+        },
+        {
+          "id": "5",
+          "command": "waitForElementVisible",
+          "target": "css=.alert-risco-alto",
+          "value": "2000"
+        },
+        {
+          "id": "6",
+          "command": "assertText",
+          "target": "css=.alert-risco-alto .title",
+          "value": "Atenção: seu risco é alto. Procure ajuda."
+        }
+      ]
+    },
+    {
+      "id": "test-ui-02",
+      "name": "AT-UI-02 Exportação de relatório gera CSV",
+      "commands": [
+        {
+          "id": "1",
+          "command": "open",
+          "target": "/admin/relatorios",
+          "value": ""
+        },
+        {
+          "id": "2",
+          "command": "click",
+          "target": "id=btnGerar",
+          "value": ""
+        },
+        {
+          "id": "3",
+          "command": "click",
+          "target": "id=btnExportarCSV",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "suite-1",
+      "name": "UI Suite",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300000,
+      "tests": [
+        "test-ui-01",
+        "test-ui-02"
+      ]
+    }
+  ],
+  "urls": [
+    "http://localhost:3000"
+  ],
+  "plugins": []
+}
