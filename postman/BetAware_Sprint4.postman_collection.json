@@ -1,0 +1,73 @@
+{
+  "info": {
+    "name": "BetAware – Sprint 4",
+    "_postman_id": "b5c4f2c7-0001-4e5c-9aaa-000000sprint4",
+    "description": "Collection de API para testes automatizados (Parte B).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Metrics: GET /metrics/:userId (U003)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/metrics/U003",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "metrics",
+            "U003"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "const body = pm.response.json();",
+              "const expected = { dailyFreq: 1.2, avgStake: 85.00 };",
+              "pm.test(\"dailyFreq confere\", () => pm.expect(body.dailyFreq).to.be.closeTo(expected.dailyFreq, 0.01));",
+              "pm.test(\"avgStake confere\", () => pm.expect(body.avgStake).to.be.closeTo(expected.avgStake, 0.01));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Risk: GET /risk/:userId (U004)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/risk/U004",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "risk",
+            "U004"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "const body = pm.response.json();",
+              "pm.test(\"Risco é HIGH\", () => pm.expect(body.riskScore).to.eql(\"high\"));",
+              "pm.test(\"Motivo inclui freq>5\", () => pm.expect(body.reasons).to.include(\"freq>5\"));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ]
+}
